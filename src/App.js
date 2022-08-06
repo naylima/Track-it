@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ProfileImage from "./Common/ProfileImage"
+import Progress from "./Common/Progress";
+import PrivatePage from "./Common/PrivatePage";
+import Login from "./Components/Login";
+import Registration from "./Components/Registration";
+import Habits from "./Components/Habits";
+import Today from "./Components/Today";
+import History from "./Components/History";
+
+function App () {
+    return (
+        <BrowserRouter>
+            <ProfileImage>
+                <Progress>
+                    <Routes>
+                        <Route path="/" element={<Login />} />
+                        <Route path="/cadastro" element={<Registration />} />
+                        <Route 
+                            path="/habitos" 
+                            element={
+                                <PrivatePage>
+                                    <Habits />
+                                </PrivatePage>
+                            }/>
+                        <Route 
+                            path="/hoje" 
+                            element={
+                                <PrivatePage>
+                                    <Today />
+                                </PrivatePage>
+                            }/>
+                        <Route 
+                            path="/historico" 
+                            element={
+                                <PrivatePage>
+                                    <History />
+                                </PrivatePage>
+                            }/>
+                    </Routes>
+                </Progress>
+            </ProfileImage>
+        </BrowserRouter>
+    )
 }
 
 export default App;
