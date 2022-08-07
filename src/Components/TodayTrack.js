@@ -1,22 +1,17 @@
-import { useState } from "react";
-
-import { TodayBox, Track, CheckIcon } from "../Style/TodayMain";
 import { checkHabit, getHabitsToday, uncheckHabit } from "../Common/Service";
+import { TodayBox, Track, CheckIcon } from "../Style/TodayMain";
 
-export function TodayTrack ({id, done, name, currentSequence, highestSequence, setData, setProgress}) {
-
-    const [isDone, setIsDone] = useState(done)
+export function TodayTrack ({ habit, setData, setProgress}) {
 
     function checkHabitToday (id){
         let promise;
-        isDone ? (
+        habit.done ? (
             promise = uncheckHabit(id)
         ):(
             promise = checkHabit(id)
         );
         
         promise.then(() => {
-            setIsDone(!isDone);
 
             const request = getHabitsToday();
             request.then ((res) => {
@@ -31,28 +26,27 @@ export function TodayTrack ({id, done, name, currentSequence, highestSequence, s
 
     return (
         <TodayBox>
-            <Track 
-                color={isDone ? "#8FC549" : "#666666"} 
-                colorRecord={(currentSequence === highestSequence && highestSequence > 0) ? 
-                                "#8FC549" : "#666666"
-                            }>
+            <Track habit={habit} >
 
-                <h2>{name}</h2>
+                <h2>{habit.name}</h2>
 
                 <p>
                     Sequência atual:{" "}                   
-                    <span className="sequence">{currentSequence} dias</span>
+                    <span className="sequence">
+                        {habit.currentSequence} dias
+                    </span>
                     <br/>
                     Seu recorde:{" "}
-                    <span className="record">{highestSequence} dias</span>  
+                    <span className="record">
+                        {habit.highestSequence} dias
+                    </span>  
                 </p> 
             </Track>
 
             <CheckIcon 
-                color={ isDone ? "#8FC549" : "#EBEBEB"} 
-                onClick={() => checkHabitToday(id)} 
-            />
-                    
+                habit={habit}
+                onClick={() => checkHabitToday(habit.id)} 
+            />                    
         </TodayBox>
     )
 }

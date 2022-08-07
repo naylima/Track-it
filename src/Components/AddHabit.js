@@ -83,7 +83,11 @@ export default function AddHabit ( { setIsClicked, setHabitList } ) {
                 </p>
                 <button onClick={sendForm} disabled={isDisabled} >
                     {isDisabled ? (
-                        <ThreeDots color="#FFFFFF" height={35} width={45} />
+                        <ThreeDots 
+                            color="#FFFFFF" 
+                            height={35} 
+                            width={45} 
+                        />
                     ) : (
                         "Salvar"
                     )}

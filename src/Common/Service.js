@@ -58,4 +58,20 @@ function uncheckHabit(id) {
     return request;
 }
 
-export {getUser, signUp, getHabits, creatHabit, deleteHabit, getHabitsToday, checkHabit, uncheckHabit};
+function getHistory() {
+    const config = createHeaders();
+    const request = axios.get(`${BASE_URL}/habits/history/daily`, config);
+    return request;
+}
+
+export {
+    getUser, 
+    signUp, 
+    getHabits, 
+    creatHabit, 
+    deleteHabit, 
+    getHabitsToday, 
+    checkHabit, 
+    uncheckHabit,
+    getHistory,
+};

@@ -31,16 +31,19 @@ export const Track = styled.div`
     }
 
     span.sequence {
-        color: ${props => props.color};
+        color: ${ ({habit}) => (habit.done ? "#8FC549" : "#666666")};
     }
 
     span.record {
-        color: ${props => props.colorRecord};
+        color: ${ ({habit}) => (habit.currentSequence === habit.highestSequence 
+                                && habit.highestSequence > 0) 
+                                    ? "#8FC549" 
+                                    : "#666666"};
     }
 `
 export const CheckIcon = styled(BsCheckSquareFill) `
     width: 80px;
     height: 80px;
     cursor:pointer;
-    color: ${props => props.color};
+    color: ${ ({habit}) => (habit.done ? "#8FC549" : "#EBEBEB")};
 `

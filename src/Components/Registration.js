@@ -36,8 +36,8 @@ export default function Registration() {
             navigate("/")
         })
         
-        promise.catch(() => {
-            alert("Não foi possível fazer o cadastro! Tente novamente.");
+        promise.catch((res) => {
+            alert(`${res.response.data.message}`);
             setIsDisable(false);
         });
     }

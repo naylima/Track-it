@@ -48,7 +48,7 @@ export default function Today () {
                     <h1>{dayNow}</h1>                    
                 </div>
                 <p>
-                    { (progress === 0) ? (
+                    { (progress === 0 || isNaN(progress)) ? (
                         "Nenhum hábito concluído ainda"
                     ):(
                         <span>
@@ -60,11 +60,7 @@ export default function Today () {
                 {data.map((habit, index) => (
                     <TodayTrack
                         key={index}
-                        id={habit.id}
-                        done={habit.done}
-                        name={habit.name}
-                        currentSequence={habit.currentSequence}
-                        highestSequence={habit.highestSequence}
+                        habit={habit}
                         setData={setData}
                         setProgress={setProgress}
                     />
