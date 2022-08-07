@@ -35,6 +35,7 @@ export default function AddHabit ( { hidden, setHidden, setHabitList } ) {
     
             promise.then(() => {
                 setHidden(true);
+                setIsDisable(false);
 
                 const request = getHabits();
                 request.then ((res) => {
