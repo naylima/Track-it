@@ -1,17 +1,16 @@
-import { useContext } from 'react';
+
 import styled from 'styled-components';
 
-import { ProfileImage } from "../Common/ProfileImage";
+
 
 export default function Header () {
 
-    const { image } = useContext(ProfileImage);
 
     return (        
         <Head>
             <h1>TrackIt</h1>
             <div>
-                <img src={image} alt='profileimg'/>
+                <img src={localStorage.getItem('image')} alt='profileimg'/>
             </div>
         </Head>        
     )

@@ -60,12 +60,12 @@ export default function History () {
 
         history.map((item) => 
             item.day === date ? ( 
-                sethabitsOfTheDay(item),
-                componentRef.current.scrollIntoView({ behavior: 'smooth' })
-            ): (
-                null
-            )
-        );
+                    sethabitsOfTheDay(item),
+                    componentRef.current.scrollIntoView({ behavior: 'smooth' })
+                ): (
+                    null
+                ));
+
     }
 
     return (

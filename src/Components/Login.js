@@ -1,7 +1,6 @@
-import React, { useState, useContext }  from 'react';
+import React, { useState }  from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-import { ProfileImage } from "../Common/ProfileImage";
 import { getUser } from '../Common/Service';
 import Container from '../Style/Container';
 import logo from '../assets/img/logo.png';
@@ -9,7 +8,6 @@ import Loader from './Loader';
 
 export default function Login() {
 
-    const { setImage } = useContext(ProfileImage);
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,7 +27,7 @@ export default function Login() {
         promise.then((res) => {
 
             const image = res.data.image;
-            setImage(image);
+            localStorage.setItem('image', image);
 
             const token = res.data.token;
             localStorage.setItem("trackit", JSON.stringify({token: token}));
