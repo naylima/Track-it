@@ -36,6 +36,10 @@ export default function AddHabit ( { hidden, setHidden, setHabitList } ) {
             promise.then(() => {
                 setHidden(true);
                 setIsDisable(false);
+                setForm({
+                        name:"",
+                        days:[],
+                    })
 
                 const request = getHabits();
                 request.then ((res) => {
