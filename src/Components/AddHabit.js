@@ -6,7 +6,7 @@ import { AddHabitBox, Weekdays } from "../Style/HabitsMain";
 import ChooseDays from "./ChooseDays";
 import { ThreeDots } from  'react-loader-spinner';
 
-export default function AddHabit ( { setIsClicked, setHabitList } ) {
+export default function AddHabit ( { hidden, setHidden, setHabitList } ) {
     
     const { setProgress} = useContext(Progress);
     const [isDisabled, setIsDisable] = useState(false);
@@ -34,7 +34,7 @@ export default function AddHabit ( { setIsClicked, setHabitList } ) {
             setIsDisable(true);
     
             promise.then(() => {
-                setIsClicked(false);
+                setHidden(true);
 
                 const request = getHabits();
                 request.then ((res) => {
@@ -57,7 +57,7 @@ export default function AddHabit ( { setIsClicked, setHabitList } ) {
     }
 
     return (
-        <AddHabitBox>
+        <AddHabitBox hidden={hidden}>
             <input
                 type="text"                
                 placeholder="nome do hábito"
@@ -78,7 +78,7 @@ export default function AddHabit ( { setIsClicked, setHabitList } ) {
             </Weekdays>
             <div className="buttons">
                 <p onClick={() => {
-                        setIsClicked(false)}}>
+                        setHidden(true)}}>
                         Cancelar
                 </p>
                 <button onClick={sendForm} disabled={isDisabled} >

@@ -8,7 +8,7 @@ import { HabitsMain, Text } from "../Style/HabitsMain";
 
 export default function Habits () {
 
-    const [isClicked, setIsClicked] = useState(false);
+    const [hidden, setHidden] = useState(true);
     const [habitList, setHabitList] = useState([]);
     const { setProgress} = useContext(Progress);
 
@@ -36,18 +36,16 @@ export default function Habits () {
                 <div className="top">
                     <h1>Meus hábitos</h1>
                     <button onClick={() => {
-                        setIsClicked(!isClicked)}}>
+                        setHidden(!hidden)}}>
                         +
                     </button>
                 </div>
-                { isClicked ? (
-                    <AddHabit 
-                        setIsClicked={setIsClicked}
-                        setHabitList={setHabitList} 
-                    /> 
-                ) : ( 
-                    ""
-                )}
+
+                <AddHabit 
+                    hidden={hidden}
+                    setHidden={setHidden}
+                    setHabitList={setHabitList} 
+                /> 
 
                 { habitList.length === 0 ? (
 

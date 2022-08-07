@@ -74,13 +74,14 @@ width: 355px;
 height: auto;
 margin-top: 15px;
 padding: 15px;
-display: flex;
 flex-direction: column;
 justify-content: space-around;
 box-sizing: border-box;
 
 background: #FFFFFF;
 border-radius: 5px;
+
+display: ${({ hidden }) => (hidden ? "hidden" : "flex")};
 
 input {
     width: 310px;
@@ -117,6 +118,7 @@ input {
 }
 
 p {
+    padding: 7px;
     font-size: 16px;
     color: #52B6FF;
     cursor: pointer;
