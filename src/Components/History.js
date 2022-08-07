@@ -1,23 +1,24 @@
 import Calendar from 'react-calendar';
 import "react-calendar/dist/Calendar.css";
 import dayjs from "dayjs";
-import styled from "styled-components";
 
+import { useState, useEffect, useRef } from 'react';
 import { getHistory } from "../Common/Service";
 import { HabitsMain } from '../Style/HabitsMain';
-import { useState, useEffect } from 'react';
+import { CalendarBox, HistoryBox, CheckIcon, XIcon } from '../Style/HistoryMain';
 
 export default function History () {
 
     const [history, setHistory] = useState([]);
     const [habitsNoDone, setHabitsNoDone] = useState([]);
     const [arrayDays, setArrayDays] = useState([]);
+    const [habitsOfTheDay, sethabitsOfTheDay] = useState([]);
+    const componentRef = useRef();
 
     useEffect(() => {
         
         const promise = getHistory();
         promise.then((res) => {
-            console.log(res.data);
             setHistory(res.data);
         })
         
@@ -29,15 +30,15 @@ export default function History () {
         const habitsNoDone = [];
         const today = dayjs().format("DD/MM/YYYY");
 
-        history.forEach((day) => {
+        history.forEach((item) => {
 
-            day.habits.map((habit) =>
+            item.habits.map((habit) =>
                 !habit.done
                     ? habitsNoDone.push(dayjs(habit.date).format("DD/MM/YYYY"))
                     : null
             );
 
-            day.habits.map((habit) => {
+            item.habits.map((habit) => {
                 days.push(dayjs(habit.date).format("DD/MM/YYYY"));
                 return days;
             });
@@ -53,7 +54,19 @@ export default function History () {
 
     }, [history]);
 
+    function handleOnClick (value) {
 
+        const date = dayjs(value).format("DD/MM/YYYY");
+
+        history.map((item) => 
+            item.day === date ? ( 
+                sethabitsOfTheDay(item),
+                componentRef.current.scrollIntoView({ behavior: 'smooth' })
+            ): (
+                null
+            )
+        );
+    }
 
     return (
         <>
@@ -75,48 +88,35 @@ export default function History () {
                             : null
                         }
                         formatDay={(locale, date) => dayjs(date).format("DD")}
+                        onClickDay={(value, event) => handleOnClick (value)}
                     />
-                </CalendarBox>  
-
+                </CalendarBox>
+    
+                <div ref={componentRef}>
+                    {habitsOfTheDay.length !== 0 ? (
+                        <RenderHabitsDay 
+                            item={habitsOfTheDay}
+                        />
+                    ) : (
+                        null
+                    )} 
+                </div>             
+                
             </HabitsMain>
         </>
     )
 }
 
-const CalendarBox = styled.div`
-    
-    .react-calendar {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border: none;
-    border-radius: 10px;
-
-        .react-calendar__month-view__weekdays {
-            padding-bottom: 23px;
-        }
-
-        .react-calendar__month-view__days {
-
-            button {
-            padding-top: 14px;
-            padding-bottom: 14px;
-            clip-path: circle();
-            }
-        }
-    }
-
-    .react-calendar.hidden {
-        display: none;
-    }
-
-    .noDone {
-        background-color: #ea5766;
-    }
-
-    .done {
-        background-color: #8cc654;
-    }
-
-
-`
+function RenderHabitsDay ({item}) {
+    return (
+        <> 
+            <h3>Hábitos do dia {item.day}</h3>
+            {item.habits.map((habit) => (
+                <HistoryBox key={habit.id} habit={habit}>
+                    <h2>{habit.name}</h2>
+                    {habit.done ? <CheckIcon /> : <XIcon />}
+                </HistoryBox>
+            ))}      
+        </>
+    )
+}

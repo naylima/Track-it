@@ -26,6 +26,11 @@ span {
     color: #8FC549;
 }
 
+h3 {
+    margin-top: 20px;
+    color: #126BA5;
+}
+
 .top {
     width: 100%;
     display: flex;

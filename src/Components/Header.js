@@ -24,6 +24,7 @@ const Head = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 1;
 
     background: #126BA5;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
