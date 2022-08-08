@@ -35,7 +35,8 @@ export const Track = styled.div`
     }
 
     span.record {
-        color: ${ ({habit}) => (habit.currentSequence === habit.highestSequence 
+        color: ${ ({habit}) => (habit.done 
+                                && habit.currentSequence === habit.highestSequence 
                                 && habit.highestSequence > 0) 
                                     ? "#8FC549" 
                                     : "#666666"};
