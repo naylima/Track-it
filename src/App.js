@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import GlobalStyle from "./Style/GlobalStyle"
 import Progress from "./Common/Progress";
 import PrivatePage from "./Common/PrivatePage";
 import Login from "./Components/Login";
@@ -11,6 +12,7 @@ import History from "./Components/History";
 function App () {
     return (
         <BrowserRouter>
+            <GlobalStyle />
             <Progress>
                 <Routes>
                     <Route path="/" element={<Login />} />

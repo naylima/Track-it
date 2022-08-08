@@ -1,11 +1,8 @@
 
 import styled from 'styled-components';
 
-
-
 export default function Header () {
-
-
+    
     return (        
         <Head>
             <h1>TrackIt</h1>
