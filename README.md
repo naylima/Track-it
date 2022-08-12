@@ -15,6 +15,14 @@
 
 + ES6 Javascript
 + Creat React App
++ Axios
+
+## Libs
+
 + React Router
 + React Calendar
-+ Axios
++ React-loader-spinner
++ React-circular-progressbar
++ React-icons
++ dayjs
+
